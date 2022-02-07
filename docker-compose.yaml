@@ -18,6 +18,13 @@ services:
     restart: always
       
 
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - mysql-compose-network
+
 networks: 
   mysql-compose-network:
     driver: bridge
