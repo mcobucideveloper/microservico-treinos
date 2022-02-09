@@ -2,10 +2,12 @@ package com.example.demo.service;
 
 import javax.transaction.Transactional;
 
+import com.example.demo.domain.exception.DefaultException;
 import com.example.demo.domain.model.Exercicios;
 import com.example.demo.infrastructure.repository.ExerciciosRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 
@@ -26,11 +28,17 @@ public class ExerciciosService {
 
 
     public void encrontraDescricao ( String descricao ) throws Exception {
+
+        var exercicio = exerciciosRepository.findByDescricao(descricao);
 		
-		
-        var Exercicos =  exerciciosRepository.findByDescricao(descricao);
+        if(exercicio.isPresent()) {
+			
+			throw new DefaultException(HttpStatus.BAD_REQUEST, "Descrição desse exercicio já existe.");		
+		}
+	
+	}
         
     }
 
     
-}
+
