@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
+import com.example.demo.api.model.ExerciciosModel;
 import com.example.demo.domain.exception.DefaultException;
 import com.example.demo.domain.model.Exercicios;
 import com.example.demo.infrastructure.repository.ExerciciosRepository;
@@ -27,6 +30,12 @@ public class ExerciciosService {
 	}
 
 
+    public List<Exercicios> listar() {
+		List<Exercicios> todosExercicios = exerciciosRepository.findAll();
+		
+		return todosExercicios;
+    }
+
     public void encrontraDescricao ( String descricao ) throws Exception {
 
         var exercicio = exerciciosRepository.findByDescricao(descricao);
@@ -38,7 +47,7 @@ public class ExerciciosService {
 	
 	}
         
-    }
+}
 
     
 
