@@ -8,13 +8,10 @@ import com.example.demo.domain.exception.DefaultException;
 import com.example.demo.domain.model.Exercicios;
 import com.example.demo.infrastructure.repository.ExerciciosRepository;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-
 
 @Service
 public class ExerciciosService {
@@ -50,6 +47,8 @@ public class ExerciciosService {
 
 	public void excluir (Long exercicioId){
 
+		buscarId(exercicioId);
+
 		exerciciosRepository.deleteById(exercicioId);
 
 
@@ -61,5 +60,20 @@ public class ExerciciosService {
 
 	}
 
-}
+	public Exercicios atualizar (Long exercicioId, Exercicios exercicio) throws Exception{
+
+		Exercicios exercicioAtual = buscarId(exercicioId);
+        
+
+        BeanUtils.copyProperties(exercicio, exercicioAtual, "id");
+
+		return salvar(exercicioAtual);
+
+		}
+
+
+
+	}
+
+
 
