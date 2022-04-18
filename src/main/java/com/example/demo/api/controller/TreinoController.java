@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import com.example.demo.api.assembler.TreinoAssembler;
 import com.example.demo.api.assembler.TreinoDisassembler;
 import com.example.demo.api.model.TreinoModel;
+import com.example.demo.api.model.input.TreinoInput;
 import com.example.demo.domain.model.Treino;
 import com.example.demo.service.TreinoService;
 
@@ -34,6 +35,18 @@ public class TreinoController {
 
     @Autowired
     private TreinoAssembler treinoAssembler;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public TreinoModel adicionar (@RequestBody @Valid TreinoInput treinoInput) throws Exception {
+        
+        Treino treino = treinoDisassembler.toDomainObject(treinoInput);
+        treino = treinoService.salvar(treino);
+
+        var objeto = treinoAssembler.toModel(treino);
+
+        return objeto;
+    } 
  
 
     @DeleteMapping("/{treinoId}")
@@ -53,9 +66,9 @@ public class TreinoController {
     @GetMapping("/{treinoId}")
 	public TreinoModel buscar(@PathVariable Long treinoId) {
 
-		var exercicio = treinoService.buscarId(treinoId);
+		var treino = treinoService.buscarId(treinoId);
 
-        return treinoAssembler.toModel(exercicio);
+        return treinoAssembler.toModel(treino);
 	}
 
     @PutMapping("/{treinoId}")

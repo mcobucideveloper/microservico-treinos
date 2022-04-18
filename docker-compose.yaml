@@ -4,10 +4,10 @@ services:
   mysqlsrv:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: user
       MYSQL_DATABASE: profissional
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
 
     ports:
       - "3306:3306"
@@ -16,14 +16,6 @@ services:
     networks:
       - mysql-compose-network
     restart: always
-      
-
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080
-    networks:
-      - mysql-compose-network
 
 networks: 
   mysql-compose-network:

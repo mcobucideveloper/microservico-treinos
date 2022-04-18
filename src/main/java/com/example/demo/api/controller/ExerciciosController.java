@@ -11,7 +11,6 @@ import com.example.demo.api.model.input.ExerciciosInput;
 import com.example.demo.domain.model.Exercicios;
 import com.example.demo.service.ExerciciosService;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;

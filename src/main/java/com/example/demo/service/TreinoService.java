@@ -22,7 +22,7 @@ public class TreinoService {
 	public Treino salvar(Treino treino) throws Exception {
 		
 		
-		return treinoRepository.save(Treino);	
+		return treinoRepository.save(treino);	
 	}
 
     public Treino buscarId (Long treinoId){
